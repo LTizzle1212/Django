@@ -1,0 +1,5 @@
+*.pyc
+_pychache_
+.vscode
+.idea
+db.sqlite3
