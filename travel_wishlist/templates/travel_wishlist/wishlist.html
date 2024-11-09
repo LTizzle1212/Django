@@ -12,19 +12,19 @@
 
 {% for place in places %} <!-- the % is used to write logic in templaes and creates for loops -->
 
-<div class="withlist-place">
-    <span class="place-name">{{  place.name  }}</span>
+    <div class="withlist-place">
+        <span id="place-name-{{ place.pk }}" class="place-name">{{  place.name  }}</span>
 
-    <form class="visited-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
-        {% csrf_token %}
-        <button>Visisted!</button>
-    </form>
+        <form class="visited-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
+            {% csrf_token %}
+            <button id="visited-button-{{ place.pk }}">Visisted!</button>
+        </form>
 
-</div>
+    </div>
 
 {% empty %}
 
-<p>You have no places in your wishlist.</p>
+    <p>You have no places in your wishlist.</p>
 
 {% endfor %}
 
