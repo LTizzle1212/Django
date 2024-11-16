@@ -44,15 +44,16 @@
 
 
 
-{% else %}
-    <p>You have not visited {{ place.name }}</p>
+    {% else %}
 
-    <form action="{% url 'place_was_visited' place.pk %}" method="POST"> # double check this
-        {% crsf_token %}
-        <button type="submit" class="visited">Visited!</button>
+    <p>You have not visited {{ place.name }} yet.</p>
+  
+    <form action="{% url 'place_was_visited' place.pk %}" method="POST">
+      {% csrf_token %}
+      <button type=submit class="visited">Visited!</button>
     </form>
-
-{% endif %}
+      
+    {% endif %}
 
 
 <form action="{% url 'delete_place' place.pk %}" method="POST">
@@ -61,6 +62,6 @@
 
 </form>
 
-<script src="{% static 'js/confirm_delete.js' %}></script>
+<script src="{% static 'js/confirm_delete.js' %}"></script>
 
 {% endblock %}

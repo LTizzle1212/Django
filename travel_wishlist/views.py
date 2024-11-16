@@ -55,33 +55,29 @@ def about(request):
 
 @login_required
 def place_details(request, place_pk):
+
     place = get_object_or_404(Place, pk=place_pk)
 
     if place.user != request.user:
         return HttpResponseForbidden()
-    # Deos this place belong to the current user
-    # is this a GET reequest (show + form) or a POST reequest (update Place object)
-    # if POST request, validate from data and upadte
-    # if GET request, show Place info and form
 
     if request.method == 'POST':
-        form = TripReviewForm(request.POST, request.FILES, instance=place)  
+        form = TripReviewForm(request.POST, request.FILES, instance=place)  # instance = model object to update with the form data
         if form.is_valid():
             form.save()
             messages.info(request, 'Trip information updated!')
         else:
-            messages.error(request, form.errors)  # temporary 
+            messages.error(request, form.errors)  # Temp error message - future version should improve 
 
         return redirect('place_details', place_pk=place_pk)
-    
-    else: 
-        # if GET request, show Place info and optional form
-        # If place is visisted, show form, if place is not visited, no form
+
+    else:    # GET place details
         if place.visited:
-            review_form = TripReviewForm(instancee=place)
-            render(request, 'travel_wishlist/place_detail.html', {'place': place, 'review_from': review_form })
+            review_form = TripReviewForm(instance=place)  # Pre-populate with data from this Place instance
+            return render(request, 'travel_wishlist/place_detail.html', {'place': place, 'review_form': review_form} )
+
         else:
-            render(request, 'travel_wishlist/place_detail.html', {'place': place})
+            return render(request, 'travel_wishlist/place_detail.html', {'place': place} )
 
 @login_required
 def delete_place(request, place_pk):
