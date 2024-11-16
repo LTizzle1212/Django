@@ -2,18 +2,20 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Travel Wishlist</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css" type="text/css">
-        <link rel="stylesheet" href="{% static 'css/style/.css'}" type="text/css">
-    </head>
+<head>
+    <title>Travel Wishlist</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style/.css' %}" type="text/css">
+</head>
 
-    <body>
-    <h1>Where do you want to go?</h1>
+<body>
+    <h1 id="site-header">Where do you want to go?</h1>
 
     
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
+
+    <hr>
     
 
     <div>

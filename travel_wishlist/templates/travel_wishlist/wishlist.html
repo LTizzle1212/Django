@@ -6,18 +6,21 @@
 <form method="POST" action="{% url 'place_list' %}"> <!-- this is URL reversing, this will look up the place list url-->
     {% csrf_token %}
     {{ new_place_form }}
-    <button id="add-new-place" type=""submit>Add</button>
+    <button id="add-new-place" type="submit">Add</button>
 </form>
 
 
 {% for place in places %} <!-- the % is used to write logic in templaes and creates for loops -->
 
     <div class="withlist-place">
-        <span id="place-name-{{ place.pk }}" class="place-name">{{  place.name  }}</span>
+
+        <span id="place-name-{{ place.pk }}" class="place-name">
+            <a> href="{% url 'place_details' place.pk%}"{{  place.name  }}</a>
+        </span>
 
         <form class="visited-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
             {% csrf_token %}
-            <button id="visited-button-{{ place.pk }}">Visisted!</button>
+            <button id="visited-button-{{ place.pk }}" type="submit">Visisted!</button>
         </form>
 
     </div>
